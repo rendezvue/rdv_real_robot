@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="node_start_delay" default="3.0" />
+
+    <include file="$(find mecanum_liftbot_integration)/launch/mlbot_real.launch" />
+    <node name="launch_delay_3" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
+
+    
+    <include file="$(find pandar_pointcloud)/launch/PandarSwift_points.launch" />
+    <node name="launch_delay_1" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
+    
+    <include file="$(find microstrain_mips)/launch/microstrain.launch" />
+    <node name="launch_delay_2" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
+
+    <node pkg="point_cloud_converter" type="point_cloud_converter_node" name="convert_cloud" output="screen">
+        <remap from="/points2_in" to="/hesai/pandar_points" />
+        <remap from="/points_out" to="/velodyne_points_pc1" />
+    </node>
+
+<!--
+    <include file="$(find hdl_localization)/launch/hdl_localization_real_robot.launch" >
+        <arg name="points_topic" default="/hesai/pandar_points" />
+        <arg name="imu_topic" default="/imu_raw" />
+    </include>
+    <include file="$(find navstack_pub)/launch/rdv_dwa_planner.launch" >
+        <arg name="lidar_topic" default="/hesai/pandar_points" />
+    </include>
+    <include file="$(find multimaster_example)/launch/multimaster_odom.launch" >
+        <arg name="foreign_ip" value="$(arg remote_ipaddr)"/>
+        <arg name="foreign_port" value="$(arg remote_port)"/>
+        <arg name="node_name" value="$(arg remote_node_name)"/>
+    </include>
+    <node name="rviz_visualizer" pkg="rviz" type="rviz" args="-d $(find hdl_localization)/rviz/hdl_localization.rviz" required="true" />-->
+</launch>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="node_start_delay" default="5.0" />
+
+    <include file="$(find mecanum_liftbot_integration)/launch/mlbot_real.launch" />
+    <node name="launch_delay_1" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
+
+    <include file="$(find pandar_pointcloud)/launch/PandarSwift_points.launch" />
+    <node name="launch_delay_2" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
+    
+    <!--    <include file="$(find microstrain_mips)/launch/microstrain.launch" />-->
+    <node name="launch_delay_3" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
+    <include file="$(find lio_sam)/launch/run.launch" />
+
+
+    <!--<include file="$(find hdl_localization)/launch/hdl_localization.launch" />
+    <include file="$(find navstack_pub)/launch/rdv_dwa_planner.launch" />
+    <include file="$(find multimaster_example)/launch/multimaster_odom.launch" >
+        <arg name="foreign_ip" value="$(arg remote_ipaddr)"/>
+        <arg name="foreign_port" value="$(arg remote_port)"/>
+        <arg name="node_name" value="$(arg remote_node_name)"/>
+    </include>
+    <node name="rviz_visualizer" pkg="rviz" type="rviz" args="-d $(find hdl_localization)/rviz/hdl_localization.rviz" required="true" />
+    <group if="$(arg with_mlbot_sim)">
+        <node pkg="nthing_gazebo_simulation" type="mlbot_pose.py" name="gazebo_sim_mlbot_pose" output="screen"/>
+    </group> -->
+</launch>

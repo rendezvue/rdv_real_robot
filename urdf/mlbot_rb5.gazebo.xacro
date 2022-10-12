@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<robot name="mlbot_rb5" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="robot_name" default="" />
+  <xacro:property name="robot_name" value="$(arg robot_name)"/>
+  <!-- Parts -->
+  <xacro:include filename="$(find rb_description)/urdf/rb5.urdf.xacro"/>
+  <xacro:include filename="$(find mecanum_liftbot_integration)/urdf/mecanum_liftbot.gazebo.xacro"/>
+
+  <joint name="lift_plate_to_Body_Base" type="fixed">
+    <parent link="lift_plate_link" />
+    <child link="Body_Base" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <!-- <robotNamespace>/</robotNamespace> -->
+    </plugin>
+  </gazebo>
+</robot>
