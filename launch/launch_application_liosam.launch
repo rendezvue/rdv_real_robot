@@ -8,7 +8,7 @@
     <include file="$(find pandar_pointcloud)/launch/PandarSwift_points.launch" />
     <node name="launch_delay_2" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
     
-    <!--    <include file="$(find microstrain_mips)/launch/microstrain.launch" />-->
+    <include file="$(find microstrain_mips)/launch/microstrain.launch" />
     <node name="launch_delay_3" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
     <include file="$(find lio_sam)/launch/run.launch" />
 

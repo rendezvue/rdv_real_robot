@@ -15,13 +15,19 @@
     <node pkg="point_cloud_converter" type="point_cloud_converter_node" name="convert_cloud" output="screen">
         <remap from="/points2_in" to="/hesai/pandar_points" />
         <remap from="/points_out" to="/velodyne_points_pc1" />
-    </node>
+    </node>    
 
-<!--
-    <include file="$(find hdl_localization)/launch/hdl_localization_real_robot.launch" >
+    <include file="$(find realsense2_camera)/launch/rs_t265.launch" />
+
+    <include file="$(find odom_trans)/launch/odom_trans.launch" />
+
+    <include file="$(find cmd_vel_sender)/launch/cmd_vel_sender.launch" />
+
+    <!-- <include file="$(find hdl_localization)/launch/hdl_localization_real_robot.launch" >
         <arg name="points_topic" default="/hesai/pandar_points" />
         <arg name="imu_topic" default="/imu_raw" />
-    </include>
+    </include> -->
+<!--    
     <include file="$(find navstack_pub)/launch/rdv_dwa_planner.launch" >
         <arg name="lidar_topic" default="/hesai/pandar_points" />
     </include>

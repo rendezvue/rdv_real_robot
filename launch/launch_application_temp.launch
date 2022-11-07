@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find hdl_localization)/launch/hdl_localization_real_robot.launch" >
+        <arg name="points_topic" default="/hesai/pandar_points" />
+        <arg name="imu_topic" default="/imu_raw" />
+    </include>
+   
+    <include file="$(find navstack_pub)/launch/rdv_eband_planner.launch" >
+        <arg name="lidar_topic" default="/hesai/pandar_points" />
+    </include>
+    <include file="$(find multimaster_example)/launch/multimaster_odom.launch" >
+        <arg name="foreign_ip" value="$(arg remote_ipaddr)"/>
+        <arg name="foreign_port" value="$(arg remote_port)"/>
+        <arg name="node_name" value="$(arg remote_node_name)"/>
+    </include>
+    <node name="rviz_visualizer" pkg="rviz" type="rviz" args="-d $(find hdl_localization)/rviz/hdl_localization.rviz" required="true" />
+</launch>
